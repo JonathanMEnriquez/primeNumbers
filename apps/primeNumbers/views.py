@@ -14,8 +14,8 @@ def prime(request):
     if request.method == 'POST':
         error = Prime.objects.isValid(request.POST['max'])
         if len(error) > 0:
-            for message in error['error']:
-                messages.error(request, message)
+            print('error')
+            messages.error(request, error['error'][0])
             return redirect('/')
         else:
             primes = "2"
