@@ -11,7 +11,11 @@
     <script type="text/javascript">
         $(document). ready(function() {
             console.log("https://github.com/JonathanMEnriquez/primeNumbers")
+            var primes = "";
+            var character_counter = 0;
             $('#jqueryButton').click(function() {
+                primes = "";
+                character_counter = 0;
                 document.getElementById('answer').innerText = "";
                 var max = parseInt($('#jqueryInput').val()) || 0;
                 if (max < 2) {
@@ -29,17 +33,30 @@
                     }
                     // Add Prime Number to Answer Section
                     if (isPrime == true) {
-                        let answer = document.getElementById('answer');
-                        if (answer.innerText == "") {
-                            answer.innerText += "2, " + i;
+                        // let answer = document.getElementById('answer');
+                        // if (answer.innerText == "") {
+                        //     answer.innerText += "2, " + i;
+                        // } else {
+                        //     answer.innerText += ", " + i;
+                        // }
+                        if (primes == "") {
+                            primes = "2, " + i;
                         } else {
-                            answer.innerText += ", " + i;
+                            primes += ", " + i;
                         }
                     }
                 }
-                return false;
+                setInterval(updateText, 300);
             })
-            
+
+            function updateText() {
+                if(character_counter == primes.length){
+                    return
+                }
+                let answer = document.getElementById('answer');
+                answer.innerHTML = answer.innerHTML + primes[character_counter];
+                character_counter++;
+		    }
         })
     </script>
 </head>
