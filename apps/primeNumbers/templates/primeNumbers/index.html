@@ -7,13 +7,70 @@
     <title>PrimeTime</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'primeNumbers/css/styles.css' %}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document). ready(function() {
+            
+            $('#jqueryButton').click(function() {
+                document.getElementById('answer').innerText = "";
+                var max = parseInt($('#jqueryInput').val()) || 0;
+                
+                if (max < 3) {
+                    // Let the user know there has been an improper input
+                    document.getElementById('error').innerText = "Bad input"
+                }
+
+                for (var i = 3; i <= max; i+=2) {
+                    let isPrime = true;
+                    for (var j = 3; j < i / 2; j+=2) {
+                        if (i % j === 0) {
+                            isPrime = false;
+                            break;
+                        }
+                    }
+                    // Add Prime Number to Answer Section
+                    if (isPrime == true) {
+                        let answer = document.getElementById('answer');
+                        if (answer.innerText == "") {
+                            answer.innerText += "" + i;
+                        } else {
+                            answer.innerText += ", " + i;
+                        }
+                    }
+                }
+
+                return false;
+            })
+            
+        })
+    </script>
 </head>
 <body>
     <div id="container">
         <!-- <div class="one">.</div> -->
         <div id="numbers">
             <h2>Prime Numbers</h2>
-            <h5 id="answer">:</h5>
+            <h5 id="answer"></h5>
+        </div>
+        <div id="jquery">
+            <input type="text" id="jqueryInput" placeholder="Using JQuery">
+            <button id="jqueryButton">Submit</button>
+        </div>
+        <div id="python">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'warning' %}
+            <div class="error_box">
+                <p class="{{message.tags}}" id="error">{{message}}</p>
+            </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <form action="/process/prime" method="POST">
+                {% csrf_token %}
+                <p><input type="text" name="max" placeholder="Using Django"></p>
+                <input type="submit" value="Submit">
+            </form>
         </div>
     </div>
 </body>
