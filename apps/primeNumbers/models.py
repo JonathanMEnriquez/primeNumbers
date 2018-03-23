@@ -16,6 +16,18 @@ class PrimeManager(models.Manager):
             response['error'] = []
             response['error'].append("Please enter valid data")
         return response
+    
+    def getPrimes(self, max):
+        primes = "2"
+        for i in range(3, max, 2):
+            isPrime = True
+            for j in range(3, (i / 2), 2):
+                if i % j == 0 & i != j:
+                    isPrime = False
+                    break
+            if isPrime == True:
+                primes += ", {}".format(i)
+        return primes
 
 class Prime(models.Model):
     objects = PrimeManager()

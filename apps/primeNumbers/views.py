@@ -8,22 +8,20 @@ from .models import *
 # Create your views here.
 
 def index(request):
-    return render(request, 'primeNumbers/index.html')
+    return render(request, 'primeNumbers/index.html', { 'primes': "" })
 
 def prime(request):
     if request.method == 'POST':
-        error = Prime.objects.isValid(request.POST)
+        error = Prime.objects.isValid(request.POST['max'])
         if len(error) > 0:
             for message in error['error']:
                 messages.error(request, message)
             return redirect('/')
         else:
-            num = int(request.POST['max'])
-            print num
-            
+            primes = "2"
+            num = int(request.POST['max']) + 1
             # run the for loop
-            for i in 1 ... num :
-                print i
+            primes = Prime.objects.getPrimes(num)
+            return render(request, 'primeNumbers/index.html', { 'primes': primes })
     else:
         return redirect('/')
-    return    

@@ -51,7 +51,11 @@
         <!-- <div class="one">.</div> -->
         <div id="numbers">
             <h1>Prime Numbers</h1>
-            <h5 id="answer"></h5>
+            <h5 id="answer">
+                {% if primes != "" %}
+                    {{ primes }}
+                {% endif %}
+            </h5>
         </div>
         <div id="jquery">
             <p id="jError"></p>
