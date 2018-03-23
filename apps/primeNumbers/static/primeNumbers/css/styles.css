@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, minmax(15vh, auto));
+    grid-gap: 1em;
+    padding: 1.5em;
+    background-color: rgb(241, 241, 241);
+    text-align: center;
+}
+
+.one {
+    grid-column: 1 / 2;
+}
+
+#numbers {
+    grid-column: 2 / 5;
+    grid-row: 1 / 4;
+    padding: 1em;
+    border: 0.25px, rgb(85, 84, 84);
+    border-style: groove;
+    border-radius: 1em;
+    box-shadow: 0px 3px #888888;
+    background-color: white;
+}
+
+#numbers h2 {
+    margin-bottom: 1em;
+    color: midnightblue;
+}
