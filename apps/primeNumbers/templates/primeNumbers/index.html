@@ -10,17 +10,15 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document). ready(function() {
-            
+            console.log("https://github.com/JonathanMEnriquez/primeNumbers")
             $('#jqueryButton').click(function() {
                 document.getElementById('answer').innerText = "";
                 var max = parseInt($('#jqueryInput').val()) || 0;
-                
                 if (max < 2) {
                     // Let the user know there has been an improper input
                     document.getElementById('jError').innerText = "Bad input";
                     return;
                 }
-
                 for (var i = 3; i <= max; i+=2) {
                     let isPrime = true;
                     for (var j = 3; j < i / 2; j+=2) {
@@ -39,7 +37,6 @@
                         }
                     }
                 }
-
                 return false;
             })
             
