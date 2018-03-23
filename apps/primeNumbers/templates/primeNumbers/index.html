@@ -15,9 +15,10 @@
                 document.getElementById('answer').innerText = "";
                 var max = parseInt($('#jqueryInput').val()) || 0;
                 
-                if (max < 3) {
+                if (max < 2) {
                     // Let the user know there has been an improper input
-                    document.getElementById('error').innerText = "Bad input"
+                    document.getElementById('jError').innerText = "Bad input";
+                    return;
                 }
 
                 for (var i = 3; i <= max; i+=2) {
@@ -32,7 +33,7 @@
                     if (isPrime == true) {
                         let answer = document.getElementById('answer');
                         if (answer.innerText == "") {
-                            answer.innerText += "" + i;
+                            answer.innerText += "2, " + i;
                         } else {
                             answer.innerText += ", " + i;
                         }
@@ -49,11 +50,12 @@
     <div id="container">
         <!-- <div class="one">.</div> -->
         <div id="numbers">
-            <h2>Prime Numbers</h2>
+            <h1>Prime Numbers</h1>
             <h5 id="answer"></h5>
         </div>
         <div id="jquery">
-            <input type="text" id="jqueryInput" placeholder="Using JQuery">
+            <p id="jError"></p>
+            <input type="number" id="jqueryInput" placeholder="Using JQuery">
             <button id="jqueryButton">Submit</button>
         </div>
         <div id="python">
@@ -61,15 +63,15 @@
                 {% for message in messages %}
                     {% if message.tags == 'warning' %}
             <div class="error_box">
-                <p class="{{message.tags}}" id="error">{{message}}</p>
+                <p class="{{message.tags}}">{{message}}</p>
             </div>
                     {% endif %}
                 {% endfor %}
             {% endif %}
             <form action="/process/prime" method="POST">
                 {% csrf_token %}
-                <p><input type="text" name="max" placeholder="Using Django"></p>
-                <input type="submit" value="Submit">
+                <p><input id="pythonInput" type="number" name="max" placeholder="Using Django"></p>
+                <input type="submit" id="pythonButton" value="Submit">
             </form>
         </div>
     </div>
